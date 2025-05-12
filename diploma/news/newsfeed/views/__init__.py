@@ -1,0 +1,1 @@
+from newsfeed.views.article_view import *

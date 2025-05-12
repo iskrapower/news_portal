@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ article.title }}</h2>
+    <div>
+        <span class="author">{{ article.author.username }}</span> |
+        <span class="date">{{ article.published_at|date:"d M Y" }}</span>
+    </div>
+    <p>
+        {{ article.description }}
+    </p>
+    <p>
+        Topics: 
+        {% for topic in article.topics %}
+            <span>topic{% if not forloop.last %},{% endif %}</span>
+        {% endfor %}
+    </p>
+{% endblock %}

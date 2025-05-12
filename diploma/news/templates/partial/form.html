@@ -1,0 +1,29 @@
+{% if not fields_only %}
+<form action="{{ action_url }}" method="{{ form_method }}" enctype="{{ enctype }}">
+        {% csrf_token %}
+{% endif %}
+
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endfor %}
+
+{% for field in form %}
+    
+    {{ field.label }}
+    {{ field }}
+    <br>
+
+    {% if field.errors %}
+
+        {% for error in field.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    
+    {% endif %}
+
+{% endfor %}
+
+{% if not fields_only %}
+        <button class="btn btn-primary">{{ btn_text|default:'Send' }}</button>
+    </form>
+{% endif %}

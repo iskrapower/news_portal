@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Creat article</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'partial/form.html' with btn_text='Create' fields_only=True %}
+    </form>
+{% endblock %}

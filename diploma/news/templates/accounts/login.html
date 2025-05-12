@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'newsfeed:article_create' %}">Создать</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="login-form-container">
+        <p class="login-form-title">Вход</p>
+        <form action="{% url 'accounts:login' %}" method="post" class="text-center">
+            {% csrf_token %}
+            {% if has_error %}
+                <p class="form-error">Неверное имя пользователя или пароль.</p>
+            {% endif %}
+            <div class="form-group">
+                <label for="username" class="form-label">Имя пользователя</label>
+                <input type="text" name="username" id="username" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" name="password" id="password" class="form-input">
+            </div>
+            <button type="submit" class="login-form-button">Войти</button>
+        </form>
+
+        <p class="register-link">
+            Нет аккаунта? <a href="{% url 'accounts:register' %}">Зарегистрироваться</a>
+        </p>
+    </div>
+{% endblock %}
