@@ -42,7 +42,7 @@ class RegisterView(CreateView):
     def get_success_url(self):
         return self.request.POST.get(
             'next',
-            self.request.GET.get('next', '')
+            self.request.GET.get('next', '/')
         )
 
 

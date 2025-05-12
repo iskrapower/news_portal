@@ -22,9 +22,8 @@
             </div>
             <button type="submit" class="login-form-button">Войти</button>
         </form>
-
-        <p class="register-link">
-            Нет аккаунта? <a href="{% url 'accounts:register' %}">Зарегистрироваться</a>
-        </p>
     </div>
+    <p class="register-link">
+        Нет аккаунта? <a href="{% url 'accounts:register' %}?next={{ request.get_full_path }}">Зарегистрироваться</a>
+    </p>
 {% endblock %}

@@ -50,8 +50,10 @@ class ArticleView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.object
-        comments = article.comments.order_by('-created_at')
+        comments = article.comments.order_by('-published_at')
         context['comments'] = comments
+        topics = article.topics.all()
+        context['topics'] = topics 
         return context
 
 
@@ -70,7 +72,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse('newsfeed:article_view', kwargs={'id': self.object.id})
+        return reverse('newsfeed:article_detail', kwargs={'id': self.object.id})
 
 
 class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
@@ -93,4 +95,4 @@ class ArticleDeleteView(DeleteView):
     model = Article
     context_object_name = 'article'
     pk_url_kwarg = 'id'
-    success_url = reverse_lazy('newsfeed:index')
+    success_url = reverse_lazy('newsfeed:article_list')

@@ -10,8 +10,15 @@
     </p>
     <p>
         Topics: 
-        {% for topic in article.topics %}
+        {% for topic in topics %}
             <span>topic{% if not forloop.last %},{% endif %}</span>
         {% endfor %}
     </p>
+    <div>
+        <a href="{% url 'newsfeed:article_update' article.id %}">Update</a>
+        <form action="{% url 'newsfeed:article_delete' article.id %}" method="post" onsubmit="return('Delete?')">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
 {% endblock %}
